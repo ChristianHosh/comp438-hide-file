@@ -14,10 +14,10 @@ public class StegnoService {
     private File currentFile;
 
     public BufferedImage encode(String message){
-        return EncodeStrategy.EncodeFile(currentFile, message);
+        return EncodeStrategy.encodeFile(currentFile, message);
     }
 
     public String decode() {
-        return DecodeStrategy.DecodeFile(currentFile);
+        return DecodeStrategy.decodeFile(currentFile);
     }
 }
