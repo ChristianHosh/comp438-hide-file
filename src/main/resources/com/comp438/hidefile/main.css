@@ -1,0 +1,5 @@
+.border-bottom {
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+}
