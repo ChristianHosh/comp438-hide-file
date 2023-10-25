@@ -63,7 +63,7 @@ public class MainController {
 
         fileChooser.setTitle("Choose a cover image");
         fileChooser.getExtensionFilters()
-                .add(new FileChooser.ExtensionFilter("PNG Files", "*.jpg", "*.png"));
+                .add(new FileChooser.ExtensionFilter("Image Files", "*.jpeg", "*.jpg", "*.png"));
 
         File currentFile = fileChooser.showOpenDialog(new Stage());
         if (currentFile == null) {
@@ -106,13 +106,12 @@ public class MainController {
 
         fileChooser.setTitle("Save encoded image");
         fileChooser.getExtensionFilters()
-                .add(new FileChooser.ExtensionFilter("PNG Files", "*.png"));
+                .add(new FileChooser.ExtensionFilter("Image Files", "*.png"));
 
         File file = fileChooser.showSaveDialog(new Stage());
 
         try {
             ImageIO.write(encodedImage, "png", file);
-
         } catch (IOException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
@@ -124,12 +123,11 @@ public class MainController {
 
         fileChooser.setTitle("Choose an image");
         fileChooser.getExtensionFilters()
-                .add(new FileChooser.ExtensionFilter("PNG Files", "*.jpg", "*.png"));
+                .add(new FileChooser.ExtensionFilter("Image Files", "*.jpeg", "*.jpg", "*.png"));
 
         File currentFile = fileChooser.showOpenDialog(new Stage());
         if (currentFile == null) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "You must choose a file");
-            alert.show();
+            new Alert(Alert.AlertType.INFORMATION, "You must choose a file").show();
             return;
         }
 
