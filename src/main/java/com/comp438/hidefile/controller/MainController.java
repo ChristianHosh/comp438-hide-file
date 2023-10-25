@@ -67,8 +67,7 @@ public class MainController {
 
         File currentFile = fileChooser.showOpenDialog(new Stage());
         if (currentFile == null) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "You must choose a file");
-            alert.show();
+            new Alert(Alert.AlertType.INFORMATION, "You must choose a file").show();
             return;
         }
 
@@ -92,7 +91,8 @@ public class MainController {
             return;
 
         String decodedText = stegnoService.decode();
-        System.out.println("Extracted Text => " + decodedText);
+
+        textArea_secretMessage.setText(decodedText);
     }
 
     @FXML
@@ -114,8 +114,7 @@ public class MainController {
             ImageIO.write(encodedImage, "png", file);
 
         } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
-            alert.show();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

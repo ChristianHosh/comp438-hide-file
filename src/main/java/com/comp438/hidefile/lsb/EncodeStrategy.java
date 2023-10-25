@@ -23,8 +23,7 @@ public class EncodeStrategy {
             replacePixelsInNewBufferedImage(pixels, image);
             return image;
         } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
-            alert.show();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             return null;
         }
     }

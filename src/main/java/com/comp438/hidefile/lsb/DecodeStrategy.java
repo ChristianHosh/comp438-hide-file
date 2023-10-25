@@ -18,8 +18,7 @@ public class DecodeStrategy {
 
             return decodeMessageFromPixels(pixels);
         } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
-            alert.show();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             return null;
         }
     }

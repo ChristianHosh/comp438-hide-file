@@ -17,9 +17,9 @@ public class HashService {
         if (currentFile == null || hash == null)
             return false;
 
-        String hashToCheckAgainst = generate();
+        String hashToCheckAgainst = generate().trim();
 
-        return (hash.equals(hashToCheckAgainst));
+        return (hash.trim().equals(hashToCheckAgainst));
     }
 
     public String generate() {
@@ -46,6 +46,6 @@ public class HashService {
             hash = Long.rotateLeft(hash, 13);
         }
 
-        return Long.toHexString(hash);
+        return Long.toHexString(hash).trim();
     }
 }
