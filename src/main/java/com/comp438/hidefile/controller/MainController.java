@@ -82,6 +82,7 @@ public class MainController {
         textField_coverImage.setText("");
         textArea_secretMessage.setText("");
 
+        stegnoService.setCurrentFile(null);
         disableStegnoControls(true);
     }
 
@@ -142,6 +143,7 @@ public class MainController {
         textField_hashImage.setText("");
         textArea_hash.setText("");
 
+        hashService.setCurrentFile(null);
         disableHashControls(true);
     }
 
