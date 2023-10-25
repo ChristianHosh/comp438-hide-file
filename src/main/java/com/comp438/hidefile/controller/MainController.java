@@ -1,5 +1,6 @@
 package com.comp438.hidefile.controller;
 
+import com.comp438.hidefile.service.HashService;
 import com.comp438.hidefile.service.StegnoService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -17,24 +18,43 @@ import java.io.IOException;
 public class MainController {
 
     @FXML
-    private TextField textField_coverImage;
-
-    @FXML
-    private TextArea textArea_secretMessage;
+    private Button button_checkHash;
 
     @FXML
     private Button button_decodeStegno;
 
     @FXML
+    private Button button_generateHash;
+
+    @FXML
     private Button button_generateStegno;
+
+    @FXML
+    private TextArea textArea_hash;
+
+    @FXML
+    private TextArea textArea_secretMessage;
+
+    @FXML
+    private TextField textField_coverImage;
+
+    @FXML
+    private TextField textField_hashImage;
 
 
     private final StegnoService stegnoService = new StegnoService();
+    private final HashService hashService = new HashService();
 
-    void disableControls(boolean disable) {
+    void disableStegnoControls(boolean disable) {
         textArea_secretMessage.setDisable(disable);
         button_generateStegno.setDisable(disable);
         button_decodeStegno.setDisable(disable);
+    }
+
+    void disableHashControls(boolean disable) {
+        textArea_hash.setDisable(disable);
+        button_checkHash.setDisable(disable);
+        button_generateHash.setDisable(disable);
     }
 
     @FXML
@@ -55,7 +75,7 @@ public class MainController {
         stegnoService.setCurrentFile(currentFile);
 
         textField_coverImage.setText(currentFile.getAbsolutePath());
-        disableControls(false);
+        disableStegnoControls(false);
     }
 
     @FXML
@@ -63,7 +83,7 @@ public class MainController {
         textField_coverImage.setText("");
         textArea_secretMessage.setText("");
 
-        disableControls(true);
+        disableStegnoControls(true);
     }
 
     @FXML
@@ -99,5 +119,56 @@ public class MainController {
         }
     }
 
+    @FXML
+    void handleChooseHashFile() {
+        FileChooser fileChooser = new FileChooser();
+
+        fileChooser.setTitle("Choose an image");
+        fileChooser.getExtensionFilters()
+                .add(new FileChooser.ExtensionFilter("PNG Files", "*.jpg", "*.png"));
+
+        File currentFile = fileChooser.showOpenDialog(new Stage());
+        if (currentFile == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "You must choose a file");
+            alert.show();
+            return;
+        }
+
+        hashService.setCurrentFile(currentFile);
+
+        textField_hashImage.setText(currentFile.getAbsolutePath());
+        disableHashControls(false);
+    }
+
+    @FXML
+    void handleClearHashFile() {
+        textField_hashImage.setText("");
+        textArea_hash.setText("");
+
+        disableHashControls(true);
+    }
+
+    @FXML
+    void handleGenerateHash() {
+        if (hashService.getCurrentFile() == null)
+            return;
+
+        String hash = hashService.generate();
+
+        textArea_hash.setText(hash);
+    }
+
+    @FXML
+    void handleCheckHash() {
+        if (hashService.getCurrentFile() == null)
+            return;
+
+        boolean isCorrect = hashService.check(textArea_hash.getText());
+
+        new Alert(
+                isCorrect ? Alert.AlertType.CONFIRMATION : Alert.AlertType.ERROR,
+                isCorrect ? "Hash matches file" : "Hash doesn't match file"
+        ).show();
+    }
 
 }
