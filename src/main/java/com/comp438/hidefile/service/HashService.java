@@ -46,6 +46,11 @@ public class HashService {
             hash = Long.rotateLeft(hash, 13);
         }
 
+        hash ^= bytes.length;
+        hash = Long.rotateRight(hash, 7);
+
         return Long.toHexString(hash).trim();
     }
+
+
 }
