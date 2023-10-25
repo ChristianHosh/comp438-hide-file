@@ -37,19 +37,18 @@ public class EncodeStrategy {
     }
 
     private static Pixel[] getPixelArray(BufferedImage imageToEncrypt) {
-//        int height = imageToEncrypt.getHeight();
-//        int width = imageToEncrypt.getWidth();
-//        Pixel[] pixels = new Pixel[height * width];
-//        int count = 0;
-//        for (int x = 0; x < width; x++) {
-//            for (int y = 0; y < height; y++) {
-//                Color colorToAdd = new Color(imageToEncrypt.getRGB(x, y));
-//                pixels[count] = new Pixel(x, y, colorToAdd);
-//                count++;
-//            }
-//        }
-//        return pixels;
-        return PixelStrategy.getPixelArrayNonSequential(imageToEncrypt);
+        int height = imageToEncrypt.getHeight();
+        int width = imageToEncrypt.getWidth();
+        Pixel[] pixels = new Pixel[height * width];
+        int count = 0;
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                Color colorToAdd = new Color(imageToEncrypt.getRGB(x, y));
+                pixels[count] = new Pixel(x, y, colorToAdd);
+                count++;
+            }
+        }
+        return pixels;
 
     }
 
