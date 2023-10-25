@@ -122,9 +122,7 @@ public class MainController {
     void handleChooseHashFile() {
         FileChooser fileChooser = new FileChooser();
 
-        fileChooser.setTitle("Choose an image");
-        fileChooser.getExtensionFilters()
-                .add(new FileChooser.ExtensionFilter("Image Files", "*.jpeg", "*.jpg", "*.png"));
+        fileChooser.setTitle("Choose a file");
 
         File currentFile = fileChooser.showOpenDialog(new Stage());
         if (currentFile == null) {

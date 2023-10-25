@@ -3,7 +3,6 @@ package com.comp438.hidefile.lsb;
 import javafx.scene.control.Alert;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import java.io.File;
@@ -24,19 +23,7 @@ public class DecodeStrategy {
     }
 
     private static Pixel[] getPixelArray(BufferedImage imageToEncrypt) {
-        int height = imageToEncrypt.getHeight();
-        int width = imageToEncrypt.getWidth();
-        Pixel[] pixels = new Pixel[height * width];
-
-        int count = 0;
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                Color colorToAdd = new Color(imageToEncrypt.getRGB(x, y));
-                pixels[count] = new Pixel(x, y, colorToAdd);
-                count++;
-            }
-        }
-        return pixels;
+        return PixelArrayStrategy.getPixelsArray(imageToEncrypt);
     }
 
     private static String decodeMessageFromPixels(Pixel[] pixels) {
