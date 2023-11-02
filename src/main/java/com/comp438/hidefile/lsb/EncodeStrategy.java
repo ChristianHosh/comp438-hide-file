@@ -9,6 +9,7 @@ import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class EncodeStrategy {
     public static BufferedImage encodeFile(File file, String message) {
@@ -37,7 +38,6 @@ public class EncodeStrategy {
 
     private static Pixel[] getPixelArray(BufferedImage imageToEncrypt) {
         return PixelArrayStrategy.getPixelsArray(imageToEncrypt);
-
     }
 
     private static String[] convertMessageToBinary(String message) {
@@ -48,8 +48,7 @@ public class EncodeStrategy {
     private static int[] convertMessageToAscii(String message) {
         int[] messageCharactersInAscii = new int[message.length()];
         for (int i = 0; i < message.length(); i++) {
-            int asciiValue = message.charAt(i);
-            messageCharactersInAscii[i] = asciiValue;
+            messageCharactersInAscii[i] = message.charAt(i);
         }
         return messageCharactersInAscii;
     }
@@ -123,8 +122,6 @@ public class EncodeStrategy {
     }
 
     private static void replacePixelsInNewBufferedImage(Pixel[] newPixels, BufferedImage newImage) {
-        for (Pixel newPixel : newPixels) {
-            newImage.setRGB(newPixel.getX(), newPixel.getY(), newPixel.getColor().getRGB());
-        }
+        Arrays.stream(newPixels).forEach(pixel -> newImage.setRGB(pixel.getX(), pixel.getY(), pixel.getRGB()));
     }
 }

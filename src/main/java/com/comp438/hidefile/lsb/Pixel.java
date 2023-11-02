@@ -25,4 +25,8 @@ public class Pixel {
     public int getBlue() {
         return color.getBlue();
     }
+
+    public int getRGB() {
+        return color.getRGB();
+    }
 }

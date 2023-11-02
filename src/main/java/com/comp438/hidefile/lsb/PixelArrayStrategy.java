@@ -6,8 +6,8 @@ import java.awt.image.BufferedImage;
 public class PixelArrayStrategy {
 
     public static Pixel[] getPixelsArray(BufferedImage image){
-        int height = image.getHeight();
         int width = image.getWidth();
+        int height = image.getHeight();
 
         Pixel[] pixels = new Pixel[height * width];
 

@@ -26,20 +26,16 @@ public class HashService {
         if (currentFile == null)
             return null;
 
-        String hash;
         try (InputStream stream = new FileInputStream(currentFile)) {
             byte[] bytes = stream.readAllBytes();
-
-            hash = createHashFromBytes(bytes);
-
-            return hash;
+            return createHashFromBytes(bytes);
         } catch (IOException exception) {
             return null;
         }
     }
 
     private String createHashFromBytes(byte[] bytes) {
-        long hash = 0;
+        long hash = Long.MAX_VALUE;
 
         for (int i = 0; i < bytes.length; i++) {
             hash ^= (bytes[i] + (i * 31L));
